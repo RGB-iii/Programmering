@@ -1,41 +1,36 @@
-function setup() { 
-	createCanvas(600, 200);
-	noStroke();
-} 
+var x, y;
+var radius;
 
-function draw() { 
-	background(131, 175, 155);
-   randomSeed(0);
-  for (var i = 35; i < width + 40; i += 40) {
-    var scalar = random(0.25, 1.0);
-    drawHappyFace(i, 100, scalar);
-  }
+function setup() {
+  createCanvas(600, 200);
+	ellipseMode(CENTER);
+  noStroke();
+
+  x = 300;
+  y = 100;
+  radius = 40;
+  
 }
 
-function drawHappyFace(x, y, s){
-   push();
-   translate(x, y);
-   scale(s);
-   //Her kommer i selv til at skrive kode
+function draw() {
+    background(230);
+		if(mouseIsOverEllipse()){
+			fill(0);
+		}
+		else{
+			fill(255);
+		}
+		ellipse(x, y, radius, radius);
+}
 
-   //Happy Face til venstre
-
-
-   //Face
-   fill(249,205,173);//rosy beige
-   ellipse(0, 0, 100, 100);
-
-   //Eye 1
-   fill(30);//dark gray
-   ellipse(0, 10, 10, 10);
-
-   //Eye 2
-   ellipse(20, 10, 10, 10);
-
-   //Mouth
-   fill(252,157,154);//light pink
-   arc(0, 25, 30, 30, 0, radians(180), PIE); 
-
-   pop();
+function mouseIsOverEllipse(){
+	var result;
+  var d = dist(mouseX, mouseY, x, y);
+  if (d < radius) {
+    result = true;
+  } else {
+    result = false;
+  }
+  return result;
 }
 
