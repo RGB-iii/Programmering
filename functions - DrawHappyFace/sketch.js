@@ -6,7 +6,16 @@ function setup() {
 function draw() { 
 	background(131, 175, 155);
    
-   translate(300, 100);
+drawHappyFace(300, 100);
+drawHappyFace(410, 100);
+}
+
+function drawHappyFace(x, y){
+   push();
+   //Her kommer i selv til at skrive kode
+
+   //Happy Face til venstre
+   translate(x, y);
 
    //Face
    fill(249,205,173);//rosy beige
@@ -23,9 +32,6 @@ function draw() {
    fill(252,157,154);//light pink
    arc(0, 25, 30, 30, 0, radians(180), PIE); 
 
-}
-
-function drawHappyFace(){
-	//Her kommer i selv til at skrive kode
+   pop();
 }
 
