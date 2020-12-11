@@ -1,0 +1,19 @@
+{
+   "results":{
+      "name": "Sunrise",
+      "r": "64",
+      "g": "29",
+      "b": "63",
+      "sunrise":"12:27:41 PM",
+      "sunset":"9:43:06 PM",
+      "solar_noon":"5:05:24 PM",
+      "day_length":"09:15:25",
+      "civil_twilight_begin":"11:55:51 AM",
+      "civil_twilight_end":"10:14:56 PM",
+      "nautical_twilight_begin":"11:20:17 AM",
+      "nautical_twilight_end":"10:50:30 PM",
+      "astronomical_twilight_begin":"10:45:52 AM",
+      "astronomical_twilight_end":"11:24:56 PM"
+   },
+   "status":"OK"
+}
