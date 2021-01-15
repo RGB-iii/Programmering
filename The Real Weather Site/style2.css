@@ -68,3 +68,11 @@ function setup() {
     gotData
     )
 }
+
+
+<p>
+City: <input id ="city" value="London" />
+<br/>
+<br/>
+<button id="submit">Search</button>
+</p>

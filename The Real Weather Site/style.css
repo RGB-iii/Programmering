@@ -1,11 +1,15 @@
-html{
+.weather-container{
     background-color: 000000;
+    text-align: center;
     }
 
-    .div {
-        text-align: center;
+    .weather {
         font-size: 22px;
         margin: 0;
     }
     
-    p class {text-align: center;}
+    .temp {
+        font-size: 60 px;
+        margin: 0;
+        font-weight: bold;
+    }
