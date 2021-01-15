@@ -1,35 +1,34 @@
-<html lang="eng">
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Den sejeste vejrudsigt</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.min.js"></script>
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/addons/p5.sound.min.js"></script>
 
-    <head>
+    <script type="text/javascript" src="sketch.js"></script>
 
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie-edge">
-        <title>Den dejligste vejr-app</title>
+    <style> body {padding: 0; margin: 0;} canvas {vertical-align: top;} </style>
 
-        <script> //src="https://code.jquery-3.3.1.min.js" //integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRoBQtmkMRdAu8=" 
-        //crossorigin="anonymous" </script>
+  </head>
+  <body>
 
+    <p>
+      City: <input id ="city"/>
+      <br/>
+      <br/>
+      <button id="submit">Search</button>
+    </p>
 
-        <script> href="script.js"</script>
-        <link rel="stylesheet" href="style.css">
+    <div class="weather-container">
+        <img class="icon">
+        <p class="weather"></p>
+        <p class="temp"></p>
+        <p class="cityName"></p>
+    </div>
 
-        
-
-    </head>
-
-
-
-    <body>
-        
-        <div class="weather-container">
-            <img class="icon">
-            <p class="weather">
-            <p class="temp">
-        </div>
-
-    </body>
-
+  </body>
 </html>
-
-//link til video: https://www.youtube.com/watch?v=InoAIgBZIEA 

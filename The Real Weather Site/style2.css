@@ -1,0 +1,70 @@
+.weather-container {
+    background: #ccc;
+    text-align: center;
+}
+
+.weather {
+    font-size: 22px;
+    margin: 0;
+}
+
+.temp {
+    font-size: 60px;
+    margin: 0;
+    font-weight: bold;
+}
+
+
+
+
+var vejr;
+
+var icon;
+var weather;
+var temp;
+var button;
+
+var api = 'http://api.openweathermap.org/data/2.5/weather?q=';
+var apiKey = '&APPID=a3e9549bfd2396cc888a0e2b5e780dd4';
+var units = '&units=metric';
+
+var input;
+
+function setup() {
+  createCanvas(400, 200);
+
+  var button = select('#submit');
+  button.mousePressed(weatherAsk);
+
+  input = select('#city');
+}
+
+function weatherAsk() {
+  var url = api + input.value() + apiKey + units;
+  loadJSON(url, gotData);
+}
+
+function gotData(data) {
+    vejr = data;
+  }
+
+
+
+
+function gotData(data) {
+    icon = "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png"; 
+    weather = data.weather[0].description;
+    temp = Math.floor(data.main.temp);
+
+    createImg(icon);
+    createP(weather);
+    createP(temp);
+}
+
+
+function setup() {
+
+    loadJSON('http://api.openweathermap.org/data/2.5/weather?q=Copenhagen&units=metric&APPID=a3e9549bfd2396cc888a0e2b5e780dd4' , 
+    gotData
+    )
+}
