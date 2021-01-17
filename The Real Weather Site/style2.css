@@ -76,3 +76,14 @@ City: <input id ="city" value="London" />
 <br/>
 <button id="submit">Search</button>
 </p>
+
+<!--Jeg giver de fire ting jeg gerne vil have skal vises på min web-app en "class".
+      Det gør at jeg nemt kan tilgå og style dem senere i min kode.
+      Jeg har prøvet at center-aligne samt ændre skriftstørrelse på disse i mit css stylesheet,
+      men intet fungerede.-->
+    <div class="weather-container">
+        <img class="icon">
+        <p class="weather"></p>
+        <p class="temp"></p>
+        <p class="cityName"></p>
+    </div>
