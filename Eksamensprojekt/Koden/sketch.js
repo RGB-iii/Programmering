@@ -1,5 +1,5 @@
 //Fra Sound Classifier
-let label = "waiting...";
+let label1 = "waiting...";
 
 // Classifier Variabel
 let classifier;
