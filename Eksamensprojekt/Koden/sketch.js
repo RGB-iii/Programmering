@@ -1,5 +1,8 @@
+//gotResult er Image Classifier
+//gotResults er fra Sound Classifier
+
 //Fra Sound Classifier
-let label1 = "waiting...";
+let soundLabel = "waiting...";
 
 // Classifier Variabel
 let classifier;
@@ -14,7 +17,7 @@ let modelURL = 'https://teachablemachine.withgoogle.com/models/AvCAQzAoW/';
 let video;
 let flippedVideo;
 // To store the classification
-let label = "";
+let imageLabel = "";
 let confidence = 0;
 
 // Dette kan ændres (Image Classifier)
@@ -32,7 +35,6 @@ function preload() {
 
   // Load Sound Classifier model
   classifier = ml5.soundClassifier(modelURL + 'model.json');
-}
 
 //Dette kan ændres (Image Classifier)
 QuestionImage = loadImage('Question.png');
@@ -43,9 +45,10 @@ NoImage = loadImage('No.png');
 TiredImage = loadImage('Tired.png');
 YesImage = loadImage('Yes.png');
 
+}
 
 function setup() {
-  createCanvas(640, 520);
+  createCanvas(640, 480);
 
   // Create the video
   video = createCapture(VIDEO);
@@ -75,11 +78,11 @@ function draw() {
   //Dette kan ændres (Sound Classification)
   let emoji = "🎧";
 
-  if (label1 == "Ko") {
+  if (soundLabel == "Ko") {
     emoji = "🐮";
-  } else if (label1 == "Kat") {
+  } else if (soundLabel == "Kat") {
     emoji = "🐱";
-  } else if (label1 == "Gris") {
+  } else if (soundLabel == "Gris") {
     emoji = "🐷";
   }
   // Opret/tegn emojisne
@@ -101,39 +104,39 @@ function draw() {
   image(flippedVideo, 0, 0);
 
   //Dette kan ændres (Image Classification)
-  if (label == "Question" && confidence > 0.95) {
+  if (imageLabel == "Question" && confidence > 0.95) {
     image(QuestionImage, 50, 50);
   }
 
-  if (label == "Idea" && confidence > 0.90) {
+  if (imageLabel == "Idea" && confidence > 0.90) {
     image(IdeaImage, 50, 5, 200, 200);
   }
 
-  if (label == "Idk" && confidence > 0.60) {
+  if (imageLabel == "Idk" && confidence > 0.60) {
     image(IdkImage, 50, 50);
   }
 
-  if (label == "Love" && confidence > 0.001) {
+  if (imageLabel == "Love" && confidence > 0.001) {
     image(LoveImage, 50, 50, 200, 200);
   }
 
-  if (label == "No" && confidence > 0.10) {
+  if (imageLabel == "No" && confidence > 0.10) {
     image(NoImage, 50, 50, 200, 200);
   }
 
-  if (label == "Tired" && confidence > 0.90) {
+  if (imageLabel == "Tired" && confidence > 0.90) {
     image(TiredImage, 50, 50, 200, 200);
   }
 
-  if (label == "Yes" && confidence > 0.50) {
+  if (imageLabel == "Yes" && confidence > 0.50) {
     image(YesImage, 50, 50, 200, 200);
   }
 
-  // Opret/tegn "label"
+  // Opret/tegn "imageLabel"
   fill(255);
   textSize(16);
   textAlign(CENTER);
-  text(label, width / 2, height - 4);
+  text(imageLabel, width / 2, height - 4);
   text(confidence, width / 2, height - 20);
 }
 
@@ -143,6 +146,7 @@ function classifyVideo() {
   classifier.classify(flippedVideo, gotResult);
 }
 
+//Image Classifier
 // Når vi får et resultat
 function gotResult(error, results) {
   // Hvis der er en fejl
@@ -150,11 +154,21 @@ function gotResult(error, results) {
     console.error(error);
     return;
   }
-
-  // Henter resultat fra et erray
-  label = results[0].label;
+    // Henter resultat fra et erray
+  imageLabel = results[0].imageLabel;
   confidence = results[0].confidence;
-
   // Classify en sidste gang
   classifyVideo();
-}
+
+  }
+
+  //Sound Classifier
+  function gotResults(error, results) {
+    if (error) {
+      console.error(error);
+      return;
+    }
+      soundLabel = results[0].soundLabel;
+    }
+
+    
