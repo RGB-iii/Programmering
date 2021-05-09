@@ -1,17 +1,20 @@
-//gotResult er Image Classifier
+//gotResult er fra Image Classifier
 //gotResults er fra Sound Classifier
 
 //Fra Sound Classifier
 let soundLabel = "waiting...";
 
-// Classifier Variabel
-let classifier;
+// Classifier Variabel for Image 
+let ImageClassifier;
+
+// Classifier Variabel for Audio 
+let SoundClassifier;
 
 // Image Classifer
-let imageModelURL = 'https://teachablemachine.withgoogle.com/models/XVPSCubOC/';
+let imageModelURL = 'https://teachablemachine.withgoogle.com/models/nThArrCPH/';
 
 // Sound Classifier
-let modelURL = 'https://teachablemachine.withgoogle.com/models/AvCAQzAoW/';
+let soundModelURL = 'https://teachablemachine.withgoogle.com/models/2ShgtwiEU/';
 
 // Video
 let video;
@@ -29,12 +32,15 @@ let NoImage;
 let TiredImage;
 let YesImage;
 
-// Load Image Classifier model
-function preload() {
-  classifier = ml5.imageClassifier(imageModelURL + 'model.json');
 
-  // Load Sound Classifier model
-  classifier = ml5.soundClassifier(modelURL + 'model.json');
+function preload() {
+
+// Load Sound Classifier model
+  SoundClassifier = ml5.soundClassifier(soundModelURL + 'model.json');
+
+// Load Image Classifier model
+  ImageClassifier = ml5.imageClassifier(imageModelURL + 'model.json');
+
 
 //Dette kan ændres (Image Classifier)
 QuestionImage = loadImage('Question.png');
@@ -44,11 +50,11 @@ LoveImage = loadImage('Love.png');
 NoImage = loadImage('No.png');
 TiredImage = loadImage('Tired.png');
 YesImage = loadImage('Yes.png');
-
 }
 
+
 function setup() {
-  createCanvas(640, 480);
+  createCanvas(640, 500);
 
   // Create the video
   video = createCapture(VIDEO);
@@ -61,44 +67,38 @@ function setup() {
 
   // classify audioen (lytter til mikrofonen by default)
   classifyAudio();
-
-
 }
 
 function classifyAudio() {
-  classifier.classify(gotResults);
+  SoundClassifier.classify(gotResults);
 }
 
 
 function draw() {
-
+  
   textAlign(CENTER, CENTER);
 
-  // Når der er baggrundslyd vises hovedtelefonerne
+  // Når der er baggrundslyd vises hovedtelefonerne.
   //Dette kan ændres (Sound Classification)
   let emoji = "🎧";
 
   if (soundLabel == "Ko") {
     emoji = "🐮";
-  } else if (soundLabel == "Kat") {
+  } 
+  else if (soundLabel == "Kat") {
     emoji = "🐱";
-  } else if (soundLabel == "Gris") {
+  } 
+  else if (soundLabel == "Gris") {
     emoji = "🐷";
   }
+  else if (soundLabel == "Hest") {
+    emoji = "🐴";
+  } 
+
   // Opret/tegn emojisne
   textSize(256);
   text(emoji, width / 2, height / 2);
 
-
-  // Classification
-  function gotResults(error, results) {
-    if (error) {
-      console.error(error);
-      return;
-    }
-    // Store the label
-    label = results[0].label;
-  }
 
   // Opret videoen
   image(flippedVideo, 0, 0);
@@ -108,19 +108,19 @@ function draw() {
     image(QuestionImage, 50, 50);
   }
 
-  if (imageLabel == "Idea" && confidence > 0.90) {
+  if (imageLabel == "Idea" && confidence > 0.40) {
     image(IdeaImage, 50, 5, 200, 200);
   }
 
-  if (imageLabel == "Idk" && confidence > 0.60) {
+  if (imageLabel == "Idk" && confidence > 0.80) {
     image(IdkImage, 50, 50);
   }
 
-  if (imageLabel == "Love" && confidence > 0.001) {
+  if (imageLabel == "Love" && confidence > 0.30) {
     image(LoveImage, 50, 50, 200, 200);
   }
 
-  if (imageLabel == "No" && confidence > 0.10) {
+  if (imageLabel == "No" && confidence > 0.50) {
     image(NoImage, 50, 50, 200, 200);
   }
 
@@ -128,7 +128,7 @@ function draw() {
     image(TiredImage, 50, 50, 200, 200);
   }
 
-  if (imageLabel == "Yes" && confidence > 0.50) {
+  if (imageLabel == "Yes" && confidence > 0.40) {
     image(YesImage, 50, 50, 200, 200);
   }
 
@@ -143,7 +143,7 @@ function draw() {
 // Get a prediction for the current video frame
 function classifyVideo() {
   flippedVideo = ml5.flipImage(video)
-  classifier.classify(flippedVideo, gotResult);
+  ImageClassifier.classify(flippedVideo, gotResult);
 }
 
 //Image Classifier
@@ -155,20 +155,19 @@ function gotResult(error, results) {
     return;
   }
     // Henter resultat fra et erray
-  imageLabel = results[0].imageLabel;
+  imageLabel = results[0].label;
   confidence = results[0].confidence;
   // Classify en sidste gang
   classifyVideo();
-
   }
 
-  //Sound Classifier
+
+  // Sound classification
   function gotResults(error, results) {
     if (error) {
       console.error(error);
       return;
     }
-      soundLabel = results[0].soundLabel;
-    }
-
-    
+    // Store the label
+    soundLabel = results[0].label;
+  }
